@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * @category   EdmondsCommerce
+ * @package    EdmondsCommerce_GrassSeedsReports
+ * @author     ModuleCreator
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+ -->
+<config>
+    <modules>
+        <EdmondsCommerce_Sales>
+            <version>0.1.0</version>
+        </EdmondsCommerce_Sales>
+    </modules>
+    <global>
+        <models>
+            <sales>
+                <rewrite>
+                    <order_pdf_invoice>EdmondsCommerce_Sales_Model_Order_Pdf_Invoice</order_pdf_invoice>
+                    <order_invoice>EdmondsCommerce_Sales_Model_Order_Invoice</order_invoice>
+                    <order_shipment>EdmondsCommerce_Sales_Model_Order_Shipment</order_shipment>
+                    <order_invoice_item>EdmondsCommerce_Sales_Model_Order_Invoice_Item</order_invoice_item>
+                </rewrite>
+            </sales>
+        </models>
+        <blocks>
+            <sales>
+                <rewrite>
+                    <order_htmlpdf_mixturelabels>EdmondsCommerce_Sales_Block_Order_Htmlpdf_Mixturelabels</order_htmlpdf_mixturelabels>
+                    <order_htmlpdf_items_mixturelabel>EdmondsCommerce_Sales_Block_Order_Htmlpdf_Items_Mixturelabel</order_htmlpdf_items_mixturelabel>
+                    <order_htmlpdf_items>EdmondsCommerce_Sales_Block_Order_Htmlpdf_Items</order_htmlpdf_items>                    
+                    <order_htmlpdf_invoice_items>EdmondsCommerce_Sales_Block_Order_Htmlpdf_Invoice_Items</order_htmlpdf_invoice_items>
+                    <order_htmlpdf_items_default>EdmondsCommerce_Sales_Block_Order_Htmlpdf_Items_Default</order_htmlpdf_items_default>
+                    <order_htmlpdf_items_order_grouped>EdmondsCommerce_Sales_Block_Order_Htmlpdf_Items_Order_Grouped</order_htmlpdf_items_order_grouped>                    
+                    <order_htmlpdf_items_order_default>EdmondsCommerce_Sales_Block_Order_Htmlpdf_Items_Order_Default</order_htmlpdf_items_order_default>
+                    <order_htmlpdf_shipment_items>EdmondsCommerce_Sales_Block_Order_Htmlpdf_Shipment_Items</order_htmlpdf_shipment_items>
+                </rewrite>
+            </sales>
+        </blocks>
+        <template>
+            <htmlpdf>
+                <sales_htmlpdf_invoice_template translate="label" module="sales">
+                    <label>Invoice Html to be used to generate Pdf </label>
+                    <file>sales/invoice_htmlpdf.html</file>
+                    <type>html</type>
+                </sales_htmlpdf_invoice_template>
+                <sales_htmlpdf_shipment_template translate="label" module="sales">
+                    <label>Invoice Html to be used to generate Pdf </label>
+                    <file>sales/shipment_htmlpdf.html</file>
+                    <type>html</type>
+                </sales_htmlpdf_shipment_template>
+                <sales_htmlpdf_invoice_office_template translate="label" module="sales">
+                    <label>Invoice Html to be used to generate Pdf </label>
+                    <file>sales/invoice_htmlpdf_office.html</file>
+                    <type>html</type>
+                </sales_htmlpdf_invoice_office_template>
+                <sales_htmlpdf_invoice_item_mixturelabel translate="label" module="sales">
+                    <label>Html template file to be used to generate pdf for mixture labels of an invoice item</label>
+                    <file>sales/mixturelabel_htmlpdf.html</file>
+                    <type>html</type>
+                </sales_htmlpdf_invoice_item_mixturelabel>
+            </htmlpdf>
+        </template>
+    </global>
+</config>

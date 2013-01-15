@@ -1,0 +1,149 @@
+<!--@subject  {{var store.getFrontendName()}}: Invoice # {{var invoice.increment_id}} for Order # {{var order.increment_id}} @-->
+<!--@vars
+{"store url=\"\"":"Store Url",
+"skin url=\"images/store_logo.png\" _area='frontend'":"Header Logo Image",
+"htmlescape var=$order.getCustomerName()":"Customer Name",
+"var $order.getStatusLabel()":"Order Status",
+"var store.getFrontendName()":"Store Name",
+"var store.getStoreAddressForPdf()":"Store Address",
+"store url=\"customer/account/\"":"Customer Account Url",
+"var invoice.increment_id":"Invoice Id",
+"var order.increment_id":"Order Id",
+"var order.billing_address.format('html')":"Billing Address",
+"var order.billing_address.getTelephone()":"Billing Address Telephone",
+"var payment_html":"Payment Details",
+"var invoice.getPaymentMethodName":"Payment Method Name",
+"var invoice.getBillingTelephone":"Billing Telephone",
+"var order.shipping_address.format('html')":"Shipping Address",
+"var order.shipping_description":"Shipping Description",
+"layout area=\"frontend\" handle=\"sales_htmlpdf_order_invoice_items\" invoice=$invoice order=$order":"Invoice Items Grid",
+"var comment":"Invoice Comment"}
+@-->
+<!DOCTYPE html>
+
+<style type="text/css">
+    table {border-collapse:collapse;margin:0px;padding: 0px;}
+    table tr{margin:0px;padding: 0px;}
+    td.a-right{text-align: right;padding-right:3px}
+    div.absolute {
+        position: absolute;
+        text-align: left;
+        vertical-align: middle;
+    }
+    table#items-table tr td{border:0.5px solid #828282;}
+    table#items-table tr th{text-align: center;border:0.5px solid #828282;font-size:20px; padding:3px 9px}
+    #header-logo{margin:0px;padding:0px}
+</style>
+
+
+<div style="margin:0px;padding:0px">
+    <table style="left:30px; width:550px;border:0.5px solid #828282;" cellspacing="0" cellpadding="0">
+        <tr><td colspan="2"><img style="width:550px" src="skin/frontend/default/modern/images/store_logo.png"/></td></tr>
+        <tr>
+            <td colspan="2"><table  cellspacing="0" cellpadding="10">
+                    <tr>
+                        <td><p style="text-align:center;font-size:20px">{{var store.getStoreAddressForPdf()}}</p></td>
+                    </tr>
+                </table></td>
+        </tr>
+        <tr bgcolor="#E6E6E6">
+            <td colspan="2" style="border:0.5px solid #828282;border-left:none;border-right:none;">
+                <table  cellspacing="0" cellpadding="5">
+                    <tr>
+                        <td style="text-align:center">Customer Invoice/Receipt</td>
+                    </tr>
+                </table>
+            </td>  
+        </tr>
+
+        <tr style="border:0.5px solid #828282;border-left:none;border-right:none;">
+            <td colspan="2" class="empty"></td>
+        </tr>
+        <tr style="border:0.5px solid #828282;border-left:none;border-right:none;margin:0px;padding:0px;height:10px">
+            <td style="border:0.5px solid #828282;text-align:left"><table  cellspacing="0" cellpadding="5">
+                    <tr>
+                        <td>Invoice To:</td>
+                    </tr>
+                </table></td>
+            <td style="border:0.5px solid #828282;text-align:left"><table  cellspacing="0" cellpadding="5">
+                    <tr>
+                        <td>Delivery To:</td>
+                    </tr>
+                </table></td>
+        </tr>
+
+        <tr style="border:0.5px solid #828282;border-left:none;border-right:none;">
+            <td  style="border:0.5px solid #828282;">
+                <table  cellspacing="0" cellpadding="5">
+                    <tr>
+                        <td>{{var order.billing_address.format('htmlpdf')}}</td>
+                    </tr>
+                </table>
+            </td>
+            <td  style="border:0.5px solid #828282;border-right:none">
+                <table  cellspacing="0" cellpadding="5">
+                    <tr>
+                        <td>{{var order.shipping_address.format('htmlpdf')}}</td>
+                    </tr>
+                </table>
+
+            </td>
+        </tr>
+        <tr>
+            <td><table  cellspacing="0" cellpadding="5">
+                    <tr>
+                        <td style="text-align:left">Contact:<br/>T:{{var invoice.getBillingTelephone()}}<br/>M:{{var invoice.getBillingFax()}}</td>
+                    </tr>
+                </table></td>
+            <td  style="border-left:0.5px solid #828282">
+                <table  cellspacing="0" cellpadding="5">
+                    <tr>
+                      <td style="text-align:left">Contact:<br/>T:{{var invoice.getShippingTelephone()}}<br/>M:{{var invoice.getShippingFax()}}</td>
+                    </tr>
+                </table>
+
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="border:0.5px solid #828282;height:25px;" class="empty" bgcolor="#E6E6E6"></td>
+        </tr>
+        <tr style="border:0.5px solid #828282;border-left:none;border-right:none;">
+            <td colspan="2" class="empty"> </td>
+        </tr>
+        <tr style=";border:0.5px solid #828282;border-left:none;border-right:none; ">
+            <td colspan="2" style="text-align:right;border:0.5px solid #828282;" >
+
+                <table  cellspacing="0" cellpadding="5">
+                    <tr>
+                        <td style="text-align:right">Invoice No:{{var invoice.increment_id}}<br/>                        
+                            Processed:{{var invoice.getCreatedAt()}}</td>
+                    </tr>
+                </table>
+
+            </td>
+        </tr>
+        <tr>
+            <td style=";border:0.5px solid #828282" colspan="2" valign="middle"><table  cellspacing="0" cellpadding="5">
+                    <tr>
+                        <td style="text-align:left">Products</td>
+                    </tr>
+                </table></td>
+        </tr>
+
+        <tr> <td colspan="2">{{layout area="frontend" handle="sales_htmlpdf_order_invoice_items" invoice=$invoice order=$order}}</td></tr>
+
+        <tr><td colspan="2" style="border:0.5px solid #828282;"><p>&nbsp;</p></td></tr>
+        <tr>
+            <td colspan="2" style="padding-right:5px;border:0.5px solid #828282;line-height:5px"><p style="text-align:right;padding-right:5px;">Payment Method:{{var invoice.getPaymentMethodName()}}&nbsp;&nbsp;</p></td>
+        </tr>
+        <tr>
+            <td class="right-padding" colspan="2" style="padding-right:5px;border:0.5px solid #828282;line-height:5px"><p style="text-align:right">Order Status: {{var order.getStatusLabel()}}&nbsp;&nbsp;</p></td>
+        </tr>
+        <tr ><td colspan="2"><p>&nbsp;</p></td></tr>
+    </table>
+</div>
+<div class="absolute" style="padding-left:0px;bottom: 10px; left: 0px; right: 40px; width:550px">
+    <img style="width:550px;" src="media/sales/store/logo/footer/default/Invoice_Footer.JPG"/>
+</div>
+
+

@@ -1,0 +1,38 @@
+<!--@subject  {{var store.getFrontendName()}}: Invoice # {{var invoice.increment_id}} for Order # {{var order.increment_id}} @-->
+<!--@vars
+"store url=\"customer/account/\"":"Customer Account Url",
+"var invoice.increment_id":"Invoice Id",
+"var order.increment_id":"Order Id",
+"layout area=\"frontend\" handle=\"sales_htmlpdf_order_invoice_mixturelabels\" invoice=$invoice order=$order":"Mixture Labels Items Renderer",
+"var order.billing_address.format('html')":"Billing Address",
+"var item.getName()":"Bundle Product name",
+"var invoice.getMixturelabelId()":"Mixture Label ID",
+"var invoice.getMixturelabelDate()":"Mixture Label Print date",
+"var item.getMixtureType()":"Item Product Mixture Type",
+"var invoice.getItemWeightForMixturelabel()":Mixture Label Weight for Item
+@-->
+<!DOCTYPE html>
+
+<style type="text/css">
+    table {border-collapse:collapse;margin:0px;padding: 0px;}
+    table tr{margin:0px;padding: 0px;}
+    td.a-right{text-align: right;padding-right:3px}
+    div.absolute {
+        position: absolute;
+        text-align: left;
+        vertical-align: middle;
+    }
+    table#items-table tr td{border:0.5px solid #828282;}
+    table#items-table tr th{text-align: center;border:0.5px solid #828282;font-size:20px; padding:3px 9px}
+    #header-logo{margin:0px;padding:0px}
+</style>
+<div>
+    <p>Seed Mixture of/for: &nbsp; <strong>{{var item.getMixtureType()}}</strong></p>
+    <p>Ref No: <strong>{{var invoice.getMixturelabelId()}}</strong></p>
+    <p>Month & Year Sealed: <strong>{{var invoice.getMixturelabelDate()}}</strong></p>
+    <p>Weight: &nbsp;<strong>{{var invoice.getItemWeightForMixturelabel()}}Kg gross</strong></p>
+    <br/>
+    <p>Name of Mixture and list of species</p>
+    <p><strong>{{var item.getName()}}</strong></p>
+    {{layout area="frontend" handle="sales_htmlpdf_order_invoice_mixturelabels" invoice=$invoice order=$order item=$item}}
+</div>

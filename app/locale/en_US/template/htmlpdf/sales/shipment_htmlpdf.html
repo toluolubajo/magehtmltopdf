@@ -1,0 +1,101 @@
+<!--@subject {{var store.getFrontendName()}}: Shipment # {{var shipment.increment_id}} for Order # {{var order.increment_id}} @-->
+<!--@vars
+{"store url=\"\"":"Store Url",
+"skin url=\"images/logo_email.gif\" _area='frontend'":"Email Logo Image",
+"htmlescape var=$order.getCustomerName()":"Customer Name",
+"var store.getFrontendName()":"Store Name",
+"store url=\"customer/account/\"":"Customer Account Url",
+"var shipment.increment_id":"Shipment Id",
+"var shipment.getTrackingDetailsForPdf()":"Tracking details",
+"var order.increment_id":"Order Id",
+"var order.billing_address.format('html')":"Billing Address",
+"var payment_html":"Payment Details",
+"var order.shipping_address.format('html')":"Shipping Address",
+"var order.shipping_description":"Shipping Description",
+"layout handle=\"sales_email_order_shipment_items\" shipment=$shipment order=$order":"Shipment Items Grid",
+"block type='core/template' area='frontend' template='htmlpdf/order/shipment/track.phtml' shipment=$shipment order=$order":"Shipment Track Details",
+"var comment":"Shipment Comment"}
+@-->
+
+<style type="text/css">
+    table {border-collapse:collapse;margin:0px;padding: 0px;}
+    table tr{margin:0px;padding: 0px;}
+    td.a-right{text-align: right;padding-right:3px}
+    table#items-table tr td{border:0.5px solid #828282;}
+</style>
+
+<div style="margin:0px;padding:0px">
+    <table style="left:30px; width:550px;border:0.5px solid #828282;" cellspacing="0" cellpadding="0">
+        <tr>
+            <td colspan="3" style="border:0.5px solid #828282;text-align:left"><table  cellspacing="0" cellpadding="5">
+                    <tr>
+                        <td>MIX SHEET</td>
+                    </tr>
+                </table></td>
+            <td colspan="3" style="border:0.5px solid #828282;text-align:left"><table  cellspacing="0" cellpadding="5">
+                    <tr>
+                        <td>ORDER NO:{{var order.increment_id}} </td>
+                    </tr>
+                </table></td>
+        </tr>
+
+        <tr style="border:0.5px solid #828282;border-left:none;border-right:none;">
+           <td></td><td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr style="border:0.5px solid #828282;border-left:none;border-right:none;margin:0px;padding:0px;height:10px">
+            <td colspan="3" style="border:0.5px solid #828282;text-align:left"><table  cellspacing="0" cellpadding="5">
+                    <tr>
+                        <td>Invoice To:</td>
+                    </tr>
+                </table></td>
+            <td colspan="3" style="border:0.5px solid #828282;text-align:left">
+                <table  cellspacing="0" cellpadding="5">
+                    <tr>
+                        <td>Delivery To:</td>
+                    </tr>
+                </table>
+
+            </td>
+        </tr>
+
+        <tr style="border:0.5px solid #828282;border-left:none;border-right:none;">
+            <td colspan="3" style="border:0.5px solid #828282;">
+                <table  cellspacing="0" cellpadding="5">
+                    <tr>
+                        <td>{{var order.billing_address.format('html')}}</td>
+                    </tr>
+                </table>
+            </td>
+            <td  colspan="3" style="border:0.5px solid #828282;border-right:none">
+                <table  cellspacing="0" cellpadding="5">
+                    <tr>
+                        <td>{{var order.shipping_address.format('html')}}</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+             <td></td><td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        {{layout handle="sales_htmlpdf_order_shipment_items" shipment=$shipment order=$order}}
+
+        <tr><td colspan="6" style="border:0.5px solid #828282;"><p>&nbsp;</p></td></tr>
+        <tr>
+            <td colspan="6" style="padding-right:5px;border:0.5px solid #828282;line-height:5px;text-align:left">
+                <table  cellspacing="0" cellpadding="5">
+                    <tr>
+                        <td>Delivery and Tracking Information</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="6" style="padding-right:5px;border:0.5px solid #828282;line-height:5px">
+                <table  cellspacing="0" cellpadding="5">
+                    <tr><td style="border-right:0.5px solid #828282;">{{var order.shipping_description}}</td><td>{{var shipment.getTrackingDetailsForPdf()}}</td></tr>
+                </table>
+            </td>
+        </tr>
+        <tr > <td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    </table>
+</div>
